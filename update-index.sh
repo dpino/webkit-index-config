@@ -129,6 +129,16 @@ function last_build
    echo "$revision $line" | tee $HOME/.last_build
 }
 
+function update_main_page
+{
+   cd $WEBKIT_DIR
+   line=$(git log -1 --pretty="format:%aI %s")
+   revision=$(revision)
+   revision_number=$(echo $revision | egrep -o "[0-9]+")
+   info="Last build: <a style='text-decoration: underline' href='https://trac.webkit.org/changeset/$revision_number/webkit'>$revision</a> $line"
+   sed -r -i "s|###LAST_BUILD###|$info|g" "$HOME/webkit-index/webkit/help.html"
+}
+
 function format_seconds
 {
     local seconds="$1"
@@ -147,7 +157,8 @@ function full_indexing
    indexer_setup
    indexer_run
    web_server_run
-    last_build
+   last_build
+   update_main_page
 
    local end=$(date +%s)
    local delta=$((end - start))
@@ -174,8 +185,9 @@ else
          "web-server-run")
             web_server_run
          ;;
-            "timestamp")
+         "timestamp")
             last_build
+            update_main_page
          ;;
       esac
    done
