@@ -28,8 +28,15 @@ LOG=$LOG_DIR/log
 
 LOCK="$HOME/.webkit-search-lock"
 if [[ -f "$LOCK" ]]; then
-   # Nothing to do, job is in process.
-    exit 0
+   now=$(date +%s)
+   mtime=$(stat -c %Y $LOCK)
+   diff=$((now - mtime))
+   if [[ "$diff" -lt 3600 ]]; then
+      # Nothing to do, job is in process.
+      exit 0
+   fi
+   rm "$LOCK"
+   touch "$LOCK"
 else
    touch "$LOCK"
 fi
