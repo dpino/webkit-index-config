@@ -142,6 +142,7 @@ function update_main_page
    line=$(git log -1 --pretty="format:%aI %s")
    revision=$(revision)
    revision_number=$(echo $revision | egrep -o "[0-9]+")
+   line=$(echo "$line" | sed -r 's|(^.*?) (https?://.*?)$|\1 <a ref="\2">\2</a>|g')
    info="Last build: <a style='text-decoration: underline' href='https://trac.webkit.org/changeset/$revision_number/webkit'>$revision</a> $line"
    sed -r -i "s|###LAST_BUILD###|$info|g" "$HOME/webkit-index/webkit/help.html"
 }
@@ -182,6 +183,12 @@ else
       case "$each" in
          "indexer-setup")
             indexer_setup
+            if [[ $? -eq 2 ]]; then
+               if [[ $# -gt 1 ]]; then
+                  echo "There are not new changes. Aborting re-indexation."
+                  exit 1
+               fi
+            fi
          ;;
          "indexer-run")
             indexer_run
