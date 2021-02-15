@@ -1,3 +1,29 @@
+<style>
+  dl {
+	border-left: 10px solid steelblue;
+    width: 60%;
+    padding: 1em;
+    background-color: #ffffd7;
+  }
+  dd {
+    padding-bottom: 1em;
+  }
+  dt {
+    font-weight: bold;
+  }
+  div.lastbuild {
+    border-left: 10px solid steelblue;
+    width: 60%;
+    padding: 5px;
+    background-color: #eee;
+    font-size: 12px;
+  }
+  div.lastbuild a {
+      text-decoration: underline;
+      color: blue;
+  }
+</style>
+
 <div class="intro">
 
 <h1>Welcome to WebKitSearch</h1>
@@ -5,23 +31,24 @@
 <h3>
   <a href="/webkit/source" style="text-decoration: underline;">WebKit codebase</a>
 </h3>
-<p style="margin-top: -15px; font-size: 12px">###LAST_BUILD###</p>
+<div class="lastbuild"><p style="margin-left: 1rem">###LAST_BUILD###</p></div>
 
-<p>
-This is an indexed version of WebKit using Searchfox.
-
-You can contribute to Searchfox! Visit Searchfox's <a href="https://github.com/mozsearch/mozsearch">Github page</a>.
+<p>This is an indexed version of WebKit using <a href="https://github.com/mozsearch/mozsearch">Searchfox</a>.</p>
 
 <h3>Query Language</h3>
 
+<p>
 Queries entered into the search box use exact string matching. No
 search operators are supported. Case insensitive matching and regular
 expression matching can be requested with the check boxes.
+</p>
 
+<p>
 Path filtering uses globbing. A path matches even if only a substring
 of the path is matched by the glob. Use the <code>^</code>
 and <code>$</code> operators to match the beginning or end of the
 path. Here are some examples:
+</p>
 
 <dl>
 
