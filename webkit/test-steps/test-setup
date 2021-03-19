@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export MOZSEARCH_PATH=/home/buildbot/mozsearch/
+export INDEX_ROOT=/home/buildbot/webkit-index/webkit
+export GIT_ROOT=/home/buildbot/webkit-index/webkit/WebKit
+export BLAME_ROOT=/home/buildbot/webkit-index/webkit/blame
+
+../setup
